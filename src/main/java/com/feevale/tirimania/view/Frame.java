@@ -4,8 +4,7 @@
  */
 package com.feevale.tirimania.view;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  *

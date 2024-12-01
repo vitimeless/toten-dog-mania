@@ -1,7 +1,6 @@
 package com.feevale.tirimania.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
@@ -46,5 +45,9 @@ public class Pedido {
 
     public boolean isConcluido() {
         return concluido;
+    }
+
+    public void setConcluido(boolean b) {
+        concluido = b;
     }
 }

@@ -11,12 +11,11 @@ import com.feevale.tirimania.model.Pedido;
 import com.feevale.tirimania.model.Sabor;
 import com.feevale.tirimania.model.gerador.GeradorDeTiposDePedidos;
 
-import static javax.swing.JOptionPane.showConfirmDialog;
-import static javax.swing.JOptionPane.showMessageDialog;
-
 import javax.swing.*;
 
 import static com.feevale.tirimania.Main.trocarTela;
+import static javax.swing.JOptionPane.showConfirmDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  *

@@ -13,7 +13,7 @@ import java.util.List;
 public class SalvarPedido {
     public static final String CAMINHO_ARQUIVO_PEDIDOS = "files/order-list.json";
     public static final String ITENS = "itens";
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    public static final ObjectMapper objectMapper = new ObjectMapper();
     public static final String VALOR_TOTAL = "valorTotal";
     public static final String CONCLUIDO = "concluido";
 
@@ -23,15 +23,18 @@ public class SalvarPedido {
             List<LinkedHashMap<String, Object>> saboresExistentes = new ArrayList<>();
             if (arquivoJson.exists()) {
                 saboresExistentes = objectMapper.readValue(arquivoJson, new TypeReference<>() {});
+
             }
             LinkedHashMap<String, Object> pedidoAtual = new LinkedHashMap<>();
             pedidoAtual.put(ITENS, pedido.getItens());
             pedidoAtual.put(VALOR_TOTAL, pedido.getValorTotal());
+            pedido.setConcluido(true);
             pedidoAtual.put(CONCLUIDO, pedido.isConcluido());
             saboresExistentes.add(pedidoAtual);
             objectMapper.writeValue(arquivoJson, saboresExistentes);
             return true;
         } catch (IOException e) {
+            pedido.setConcluido(false);
             return false;
         }
     }

@@ -4,11 +4,14 @@
  */
 package com.feevale.tirimania.view;
 
+import com.feevale.tirimania.controller.BucarPedidosSalvos;
+
 /**
  *
  * @author vitoria
  */
 public class OrderList extends javax.swing.JPanel {
+    private BucarPedidosSalvos bucarPedidosSalvos = new BucarPedidosSalvos();
 
     /**
      * Creates new form Home
@@ -25,6 +28,7 @@ public class OrderList extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bucarPedidosSalvos.buscarPedidos();
 
         jFrame1 = new javax.swing.JFrame();
 

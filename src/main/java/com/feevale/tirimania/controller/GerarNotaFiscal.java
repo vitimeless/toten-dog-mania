@@ -9,12 +9,6 @@ import java.time.format.DateTimeFormatter;
 
 public class GerarNotaFiscal {
 
-
-    public static final int BEGIN_INDEX = 0;
-    public static final int END_INDEX = 19;
-    public static final String TARGET = "T";
-    public static final String REPLACEMENT = "-";
-    public static final String TARGET1 = ":";
     public static final String EXTENISION_FILE = ".txt";
     public static final String FILES_NOTA_FISCAL = "files/nota-fiscal-";
 
