@@ -4,7 +4,7 @@
  */
 package com.feevale.tirimania.view;
 
-import static com.feevale.tirimania.TiriMania.trocarTela;
+import static com.feevale.tirimania.Main.trocarTela;
 
 /**
  *
@@ -111,11 +111,9 @@ public class Home extends javax.swing.JPanel {
 
     }//GEN-LAST:event_novoPedidoActionPerformed
 
-    private void verPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verPedidosActionPerformed
-        // TODO add your handling code here:
+    private void verPedidosActionPerformed(java.awt.event.ActionEvent evt) {
         trocarTela(new OrderList());
-    }//GEN-LAST:event_verPedidosActionPerformed
-
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Subtitulo;

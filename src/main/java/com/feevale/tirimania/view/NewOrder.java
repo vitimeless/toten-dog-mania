@@ -4,18 +4,19 @@
  */
 package com.feevale.tirimania.view;
 
-import com.feevale.tirimania.controller.SaveOrder;
+import com.feevale.tirimania.controller.GerarNotaFiscal;
+import com.feevale.tirimania.controller.SalvarPedido;
 import com.feevale.tirimania.model.Item;
 import com.feevale.tirimania.model.Pedido;
 import com.feevale.tirimania.model.Sabor;
-import com.feevale.tirimania.model.factory.AlimentosFactory;
+import com.feevale.tirimania.model.gerador.GeradorDeTiposDePedidos;
 
 import static javax.swing.JOptionPane.showConfirmDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 import javax.swing.*;
 
-import static com.feevale.tirimania.TiriMania.trocarTela;
+import static com.feevale.tirimania.Main.trocarTela;
 
 /**
  *
@@ -91,7 +92,7 @@ public class NewOrder extends javax.swing.JPanel {
             }
         });
 
-        buttonExcluirPedido.addActionListener(this::removerPedido);
+        buttonExcluirPedido.addActionListener(this::removerItem);
 
         jPasswordField1.setText("jPasswordField1");
 
@@ -169,10 +170,10 @@ public class NewOrder extends javax.swing.JPanel {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(AlimentosFactory.getAlimentos()));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(GeradorDeTiposDePedidos.getAlimentos()));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                atualizarAlimentos(evt);
+                atualizarItens(evt);
             }
         });
         Item selecionado = (Item) jComboBox1.getSelectedItem();
@@ -274,26 +275,34 @@ public class NewOrder extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConcluirActionPerformed
+    private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         int retorno = showConfirmDialog(null, "Certeza que quer cancelar?");
         if (retorno == 0)
             trocarTela(new Home());
-    }//GEN-LAST:event_buttonConcluirActionPerformed
+    }
 
     private void buttonFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
         // TODO add your handling code here:
-        boolean salvo = SaveOrder.saveOrder(pedido);
-        if(!salvo)
-            showMessageDialog(null, "Erro ao finalizar pedido!");
-        else
-            trocarTela(new Home());
+        int retorno = showConfirmDialog(null, "Certeza que quer concluir?");
+        if (retorno == 0){
+            boolean salvo = SalvarPedido.salvarPedido(pedido);
+            if(!salvo)
+                showMessageDialog(null, "Erro ao finalizar pedido!");
+            else {
+                int gerarNotaFiscal = showConfirmDialog(null, "Gerar Nota Fiscal?");
+                if(gerarNotaFiscal == 0) {
+                    GerarNotaFiscal.gerarNotaFiscal(pedido);
+//                    trocarTela(new Home());
+                }
+            }
+        }
 
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
     private void buttonNotaFiscalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNotaFiscalActionPerformed
         // TODO add your handling code here:
-        System.out.println(" oii ");
+        GerarNotaFiscal.gerarNotaFiscal(pedido);
     }//GEN-LAST:event_buttonNotaFiscalActionPerformed
 
     private void buttonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVoltarActionPerformed
@@ -318,12 +327,12 @@ public class NewOrder extends javax.swing.JPanel {
         txtValorPedido.setText("Valor: R$ " + pedido.getValorTotal());
     }
 
-    private void atualizarAlimentos(java.awt.event.ActionEvent evt) {
+    private void atualizarItens(java.awt.event.ActionEvent evt) {
         Item selecionado = (Item) jComboBox1.getSelectedItem();
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(selecionado.getSabores()));
     }
 
-    private void removerPedido(java.awt.event.ActionEvent evt) {
+    private void removerItem(java.awt.event.ActionEvent evt) {
         int index = jList2.getSelectedIndex();
         pedido.removerItem(index);
         atualizarListaDePedidos();

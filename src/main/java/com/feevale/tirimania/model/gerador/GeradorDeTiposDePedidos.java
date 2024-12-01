@@ -1,4 +1,4 @@
-package com.feevale.tirimania.model.factory;
+package com.feevale.tirimania.model.gerador;
 
 import com.feevale.tirimania.model.Item;
 import com.feevale.tirimania.model.Sabor;
@@ -6,7 +6,7 @@ import com.feevale.tirimania.model.Sabor;
 import java.util.List;
 import java.util.Vector;
 
-public class AlimentosFactory {
+public class GeradorDeTiposDePedidos {
 
     public static Vector<Item> getAlimentos() {
         return new Vector<>(List.of(

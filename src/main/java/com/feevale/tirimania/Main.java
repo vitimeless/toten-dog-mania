@@ -11,7 +11,7 @@ import javax.swing.JPanel;
  *
  * @author vitoria
  */
-public class TiriMania {    
+public class Main {
     private static Frame frame ;
 
     public static void main(String[] args) {
