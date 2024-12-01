@@ -26,7 +26,7 @@ public class AlimentosFactory {
                         )
                         , 7.0f),
                 new Item("Enroladinho de Salsicha",
-                        null
+                        List.of()
                         , 1.0f)
         ));
     }

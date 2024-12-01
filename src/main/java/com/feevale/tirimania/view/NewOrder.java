@@ -2,17 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.feevale.tirimania.ui;
+package com.feevale.tirimania.view;
 
+import com.feevale.tirimania.controller.SaveOrder;
 import com.feevale.tirimania.model.Item;
 import com.feevale.tirimania.model.Pedido;
 import com.feevale.tirimania.model.Sabor;
 import com.feevale.tirimania.model.factory.AlimentosFactory;
 
-import javax.swing.*;
-import java.awt.*;
+import static javax.swing.JOptionPane.showConfirmDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
 
-import static com.feevale.tirimania.model.factory.AlimentosFactory.getAlimentos;
+import javax.swing.*;
+
+import static com.feevale.tirimania.TiriMania.trocarTela;
 
 /**
  *
@@ -41,7 +44,6 @@ public class NewOrder extends javax.swing.JPanel {
         jFrame1 = new javax.swing.JFrame();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        jSpinner1 = new javax.swing.JSpinner();
         jButton3 = new javax.swing.JButton();
         jPasswordField1 = new javax.swing.JPasswordField();
         Titulo = new javax.swing.JLabel();
@@ -54,9 +56,8 @@ public class NewOrder extends javax.swing.JPanel {
         jList2 = new javax.swing.JList<>();
         buttonExcluirPedido = new javax.swing.JButton();
         txtValorPedido = new javax.swing.JLabel();
-        valorPedido = new javax.swing.JTextField();
-        buttonConcluir = new javax.swing.JButton();
         buttonCancelar = new javax.swing.JButton();
+        buttonConcluir = new javax.swing.JButton();
         buttonNotaFiscal = new javax.swing.JButton();
         buttonVoltar = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -89,6 +90,8 @@ public class NewOrder extends javax.swing.JPanel {
                 jButton3ActionPerformed(evt);
             }
         });
+
+        buttonExcluirPedido.addActionListener(this::removerPedido);
 
         jPasswordField1.setText("jPasswordField1");
 
@@ -126,29 +129,23 @@ public class NewOrder extends javax.swing.JPanel {
         txtValorPedido.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
         txtValorPedido.setText("Total do pedido:");
 
-        valorPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                valorPedidoActionPerformed(evt);
-            }
-        });
-
-        buttonConcluir.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
-        buttonConcluir.setForeground(new java.awt.Color(255, 0, 0));
-        buttonConcluir.setText("Cancelar pedido");
-        buttonConcluir.setActionCommand("");
-        buttonConcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonConcluirActionPerformed(evt);
-            }
-        });
-
         buttonCancelar.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
-        buttonCancelar.setForeground(new java.awt.Color(0, 153, 0));
-        buttonCancelar.setText("Concluir pedido");
+        buttonCancelar.setForeground(new java.awt.Color(255, 0, 0));
+        buttonCancelar.setText("Cancelar pedido");
         buttonCancelar.setActionCommand("");
         buttonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCancelarActionPerformed(evt);
+            }
+        });
+
+        buttonConcluir.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
+        buttonConcluir.setForeground(new java.awt.Color(0, 153, 0));
+        buttonConcluir.setText("Concluir pedido");
+        buttonConcluir.setActionCommand("");
+        buttonConcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonFinalizarActionPerformed(evt);
             }
         });
 
@@ -208,9 +205,9 @@ public class NewOrder extends javax.swing.JPanel {
                                     .addComponent(buttonAddPedido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(buttonExcluirPedido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(buttonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                                        .addComponent(buttonConcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(buttonConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(buttonNotaFiscal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(buttonVoltar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
@@ -229,7 +226,6 @@ public class NewOrder extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(valorPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(181, 181, 181))
         );
         layout.setVerticalGroup(
@@ -258,11 +254,10 @@ public class NewOrder extends javax.swing.JPanel {
                 .addGap(34, 34, 34)
                 .addComponent(txtValorPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(valorPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonConcluir)
-                    .addComponent(buttonCancelar))
+                    .addComponent(buttonCancelar)
+                    .addComponent(buttonConcluir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonNotaFiscal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -279,43 +274,66 @@ public class NewOrder extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void buttonConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConcluirActionPerformed
+    private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConcluirActionPerformed
         // TODO add your handling code here:
+        int retorno = showConfirmDialog(null, "Certeza que quer cancelar?");
+        if (retorno == 0)
+            trocarTela(new Home());
     }//GEN-LAST:event_buttonConcluirActionPerformed
 
-    private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
+    private void buttonFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
         // TODO add your handling code here:
+        boolean salvo = SaveOrder.saveOrder(pedido);
+        if(!salvo)
+            showMessageDialog(null, "Erro ao finalizar pedido!");
+        else
+            trocarTela(new Home());
+
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
     private void buttonNotaFiscalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNotaFiscalActionPerformed
         // TODO add your handling code here:
+        System.out.println(" oii ");
     }//GEN-LAST:event_buttonNotaFiscalActionPerformed
 
     private void buttonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVoltarActionPerformed
         // TODO add your handling code here:
+        trocarTela(new Home());
     }//GEN-LAST:event_buttonVoltarActionPerformed
 
     private void buttonAddPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddPedidoActionPerformed
         Item selecionado = (Item) jComboBox1.getSelectedItem();
+        Sabor saborSelecionado = (Sabor) jComboBox2.getSelectedItem();
+        selecionado.selecionarSabor(saborSelecionado);
         pedido.adicionarItem(selecionado);
 
-        DefaultListModel<Item> listModel = new DefaultListModel<>();
-        pedido.getItens().forEach(listModel::addElement);
+        atualizarListaDePedidos();
+    }//GEN-LAST:event_buttonAddPedidoActionPerformed
+
+    private void atualizarListaDePedidos() {
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        pedido.getItens().forEach(element -> listModel.addElement(element.toString() + " " + element.getSaborSelecionado() +  " " + " R$ " + element.getPreco()));
         jList2.setModel(listModel);
 
-        txtValorPedido.setText("R$ " + pedido.getValorTotal());
-    }//GEN-LAST:event_buttonAddPedidoActionPerformed
+        txtValorPedido.setText("Valor: R$ " + pedido.getValorTotal());
+    }
 
     private void atualizarAlimentos(java.awt.event.ActionEvent evt) {
         Item selecionado = (Item) jComboBox1.getSelectedItem();
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(selecionado.getSabores()));
     }
 
+    private void removerPedido(java.awt.event.ActionEvent evt) {
+        int index = jList2.getSelectedIndex();
+        pedido.removerItem(index);
+        atualizarListaDePedidos();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Titulo;
     private javax.swing.JButton buttonAddPedido;
-    private javax.swing.JButton buttonCancelar;
     private javax.swing.JButton buttonConcluir;
+    private javax.swing.JButton buttonCancelar;
     private javax.swing.JButton buttonExcluirPedido;
     private javax.swing.JButton buttonNotaFiscal;
     private javax.swing.JButton buttonVoltar;
@@ -326,14 +344,11 @@ public class NewOrder extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList<String> jList1;
-    private javax.swing.JList<Item> jList2;
+    private javax.swing.JList<String> jList2;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JScrollPane listaPedidosAdd;
     private javax.swing.JLabel txtItensPedidos;
     private javax.swing.JLabel txtSabor;
     private javax.swing.JLabel txtValorPedido;
-    private javax.swing.JTextField valorPedido;
-    // End of variables declaration//GEN-END:variables
 }

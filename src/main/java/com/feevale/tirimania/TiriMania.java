@@ -4,7 +4,7 @@
 
 package com.feevale.tirimania;
 
-import com.feevale.tirimania.ui.Frame;
+import com.feevale.tirimania.view.Frame;
 import javax.swing.JPanel;
 
 /**

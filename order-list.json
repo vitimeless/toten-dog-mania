@@ -1,0 +1,68 @@
+[
+  {
+    "itens": [
+      {
+        "nome": "Pastel",
+        "saborSelecionado": {
+          "nome": "Carne"
+        },
+        "preco": 9.0
+      },
+      {
+        "nome": "Pastel",
+        "saborSelecionado": {
+          "nome": "Carne"
+        },
+        "preco": 9.0
+      }
+    ],
+    "valorTotal": 18.0,
+    "concluido": false
+  },
+  {
+    "itens": [],
+    "valorTotal": 0.0,
+    "concluido": false
+  },
+  {
+    "itens": [
+      {
+        "nome": "Pastel",
+        "saborSelecionado": {
+          "nome": "Carne"
+        },
+        "preco": 9.0
+      },
+      {
+        "nome": "Pastel",
+        "saborSelecionado": {
+          "nome": "Carne"
+        },
+        "preco": 9.0
+      },
+      {
+        "nome": "Pastel",
+        "saborSelecionado": {
+          "nome": "Carne"
+        },
+        "preco": 9.0
+      },
+      {
+        "nome": "Pastel",
+        "saborSelecionado": {
+          "nome": "Carne"
+        },
+        "preco": 9.0
+      },
+      {
+        "nome": "Pastel",
+        "saborSelecionado": {
+          "nome": "Carne"
+        },
+        "preco": 9.0
+      }
+    ],
+    "valorTotal": 45.0,
+    "concluido": false
+  }
+]
