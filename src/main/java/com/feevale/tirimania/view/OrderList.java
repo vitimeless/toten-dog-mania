@@ -8,8 +8,11 @@ import com.feevale.tirimania.controller.BucarPedidosSalvos;
 import com.feevale.tirimania.controller.GeradorDeRelatorio;
 import com.feevale.tirimania.model.Pedido;
 
+import java.awt.event.ActionEvent;
 import java.util.List;
 import java.util.Vector;
+
+import static com.feevale.tirimania.Main.trocarTela;
 
 /**
  *
@@ -69,6 +72,11 @@ public class OrderList extends javax.swing.JPanel {
         jButton1.setText("Relatório de pedidos");
         jButton1.addActionListener((event) -> gerarRelatorio());
         jButton2.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jButton2.setText("Voltar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -108,6 +116,10 @@ public class OrderList extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(ActionEvent evt) {
+        trocarTela(new Home());
+    }
+
     public void gerarRelatorio() {
         List<Pedido> listaDePedidos = pedidos.stream().map(pedido -> pedido.pedido ).toList();
         geradorDeRelatorio.gerarRelatorio(listaDePedidos);
@@ -121,6 +133,7 @@ public class OrderList extends javax.swing.JPanel {
         }
         return items;
     }
+
 
     /**
      * @param args the command line arguments

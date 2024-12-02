@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Vector;
 
 import static com.feevale.tirimania.controller.GerarNotaFiscal.EXTENISION_FILE;
 

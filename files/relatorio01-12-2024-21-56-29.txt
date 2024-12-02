@@ -1,0 +1,40 @@
+==================== RELATÓRIO GERAL ====================
+--------------------  DOG MANIA  --------------------
+---------------- 01/12/2024 21:56:29 -----------------
+=================== Pedido #0 =====================
+Item:                             Valor:                                            
+Pastel Carne                      9,00                                              
+Total:                            9,00                                              
+=================== Pedido #1 =====================
+Item:                             Valor:                                            
+Pastel Carne                      9,00                                              
+Pão de queijo                     3,00                                              
+Total:                            12,00                                             
+=================== Pedido #2 =====================
+Item:                             Valor:                                            
+Enroladinho de Salsicha           1,00                                              
+Empada Carne de panela            10,00                                             
+Total:                            11,00                                             
+=================== Pedido #3 =====================
+Item:                             Valor:                                            
+Pastel Brocolis                   9,00                                              
+Pizza Calabresa                   12,00                                             
+Total:                            21,00                                             
+=================== Pedido #4 =====================
+Item:                             Valor:                                            
+Pastel Carne                      9,00                                              
+Empada Frango                     10,00                                             
+Pizza Calabresa                   12,00                                             
+Total:                            31,00                                             
+=================== Pedido #5 =====================
+Item:                             Valor:                                            
+Sanduiche Queijo                  7,00                                              
+Pizza Calabresa                   12,00                                             
+Hamburguer                        7,00                                              
+Total:                            26,00                                             
+=================== Pedido #6 =====================
+Item:                             Valor:                                            
+Pastel Carne                      9,00                                              
+Empada Carne de panela            10,00                                             
+Total:                            19,00                                             
+=====================================================
